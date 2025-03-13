@@ -1,28 +1,27 @@
 import express from "express";
-import { config } from "dotenv";
 import chats from "./Data/Data.js"; // Ensure this is using the correct path
-const app = express();//-
+const app = express(); //-
 import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
+import connectDB from "./config/db.js";
+import dotenv from "dotenv";
+import { NotFound, ErrorHandler } from "./middleware/errorMiddleware.js";
 
-config();
+dotenv.config();
+connectDB();
 app.use(cors());
-
-app.get("/", (req, res) => {//-
-  res.send("Hello World!");//-
+app.use(express.json()); // Body parser
+app.get("/", (req, res) => {
+  //-
+  res.send("Hello World!"); //-
 });
+console.log("User Routes Loaded");
+app.use("/api/user", userRoutes);
 
-app.get("/api/chats", (req, res) => {
-  res.send(chats);
-});
+app.use(NotFound);
+app.use(ErrorHandler);
 
-app.get("/api/chats/:id", (req , res) => {
-  const chat = chats.find((c) => c._id === req.params.id);
-  res.send(chat)
-  console.log(chat)
-})
-
-
-const PORT = process.env.PORT || 5000;//-
+const PORT = process.env.PORT || 5000; //-
 app.listen(5000, () => {
   console.log(`Port Listen on ${PORT}`);
 });

@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Box, Text, Tabs } from "@chakra-ui/react";
 import "../App.css";
 import Login from "../Authentication/Login";
+import Signup from "../Authentication/Signup";
 
 const Homepage = () => {
   return (
@@ -25,14 +26,17 @@ const Homepage = () => {
           Syncify
         </Text>
       </Box>
-      <Box bg="white" w="100%" p={10} borderRadius="xl" borderWidth="1px">
-        <Tabs.Root variant="enclosed" maxW="xl" fitted defaultValue={"tab-1"}>
+      <Box bg="white"w="100%" p={10} borderRadius="xl" borderWidth="1px">
+        <Tabs.Root variant="enclosed" maxW="xl"  gap="5px" fitted defaultValue={"tab-1"}>
           <Tabs.List>
             <Tabs.Trigger value="tab-1">Login</Tabs.Trigger>
             <Tabs.Trigger value="tab-2">Sign Up</Tabs.Trigger>
           </Tabs.List>
           <Tabs.Content value="tab-1">
             <Login />
+          </Tabs.Content>
+          <Tabs.Content value="tab-2">
+           <Signup />
           </Tabs.Content>
         </Tabs.Root>
       </Box>
